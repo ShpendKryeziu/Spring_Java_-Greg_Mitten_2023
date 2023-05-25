@@ -1,11 +1,11 @@
 package com.example.springboot;
 
-public class Meal {
+public class Pasto {
     private String name;
     private String description;
     private double price;
 
-    public Meal (String name, String description, double price) {
+    public Pasto(String name, String description, double price) {
         this.name = name;
         this.description = description;
         this.price = price;
