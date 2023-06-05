@@ -1,6 +1,5 @@
-package com.example.springboot.model;
+package com.example.springboot.Exercise5;
 
-import com.fasterxml.jackson.annotation.JsonBackReference;
 import jakarta.persistence.*;
 
 @Entity
@@ -9,26 +8,24 @@ public class Ingredient {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
     private String name;
+    @Column (name = "isVegeterian")
     private boolean isVegetarian;
+    @Column (name = "isVegan")
     private boolean isVegan;
+    @Column (name = "isGlutenFree")
     private boolean isGlutenFree;
+    @Column (name = "isLactoseFree")
     private boolean isLactoseFree;
 
-    @JsonBackReference
-    @ManyToOne
-    private Meal meal;
-
-    public Ingredient() {
-    }
-
     public Ingredient(String name, boolean isVegetarian, boolean isVegan, boolean isGlutenFree, boolean isLactoseFree) {
-        this.id = id;
-        this.name = name;
-        this.isVegetarian = isVegetarian;
-        this.isVegan = isVegan;
-        this.isGlutenFree = isGlutenFree;
-        this.isLactoseFree = isLactoseFree;
+        this.setName(name);
+        this.setIsVegetarian(isVegetarian);
+        this.setIsVegan(isVegan);
+        this.setIsGlutenFree(isGlutenFree);
+        this.setIsLactoseFree(isLactoseFree);
     }
+
+    public Ingredient() {}
 
     public Long getId() {
         return id;
@@ -50,7 +47,7 @@ public class Ingredient {
         return isVegetarian;
     }
 
-    public void setVegetarian(boolean vegetarian) {
+    public void setIsVegetarian(boolean vegetarian) {
         isVegetarian = vegetarian;
     }
 
@@ -58,7 +55,7 @@ public class Ingredient {
         return isVegan;
     }
 
-    public void setVegan(boolean vegan) {
+    public void setIsVegan(boolean vegan) {
         isVegan = vegan;
     }
 
@@ -66,7 +63,7 @@ public class Ingredient {
         return isGlutenFree;
     }
 
-    public void setGlutenFree(boolean glutenFree) {
+    public void setIsGlutenFree(boolean glutenFree) {
         isGlutenFree = glutenFree;
     }
 
@@ -74,15 +71,7 @@ public class Ingredient {
         return isLactoseFree;
     }
 
-    public void setLactoseFree(boolean lactoseFree) {
+    public void setIsLactoseFree(boolean lactoseFree) {
         isLactoseFree = lactoseFree;
-    }
-
-    public Meal getMeal() {
-        return meal;
-    }
-
-    public void setMeal(Meal meal) {
-        this.meal = meal;
     }
 }
