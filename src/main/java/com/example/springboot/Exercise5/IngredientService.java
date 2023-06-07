@@ -7,27 +7,25 @@ import java.sql.SQLException;
 
 @Service
 public class IngredientService {
-    private IngredientDaoCustom ingredientDaoCustom;
-    private IngredientDaoCustomImpl ingredientDaoImpl;
+    private IngredientDao ingredientDao;
     @Autowired
-    public IngredientService(IngredientDaoCustom ingredientDaoCustom, IngredientDaoCustomImpl ingredientDaoImpl) {
-        this.ingredientDaoCustom = ingredientDaoCustom;
-        this.ingredientDaoImpl = ingredientDaoImpl;
+    public IngredientService(IngredientDao ingredientDao) {
+        this.ingredientDao = ingredientDao;
     }
 
     public void addIngredient(Ingredient ingredient) {
-        ingredientDaoCustom.save(ingredient);
+        ingredientDao.save(ingredient);
     }
 
     public Ingredient getIngredient(Long ingredientId) {
-        return ingredientDaoCustom.findById(ingredientId).orElse(null);
+        return ingredientDao.findById(ingredientId).orElse(null);
     }
 
     public void updateIngredient(Ingredient ingredient, Long ingredientId) throws SQLException {
-        ingredientDaoImpl.updateById(ingredient, ingredientId);
+        ingredientDao.updateById(ingredientDao, ingredient, ingredientId);
     }
 
     public void deleteIngredient(Long ingredientId) {
-        ingredientDaoCustom.deleteById(ingredientId);
+        ingredientDao.deleteById(ingredientId);
     }
 }
