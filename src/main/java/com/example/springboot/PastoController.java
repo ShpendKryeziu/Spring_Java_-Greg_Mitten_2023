@@ -1,5 +1,6 @@
 package com.example.springboot;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -8,11 +9,17 @@ import java.util.Arrays;
 import java.util.List;
 
 @RestController
-public class MealEndpoint {
+public class PastoController {
+    private PastoService pastoService;
+    @Autowired
+    public PastoController(PastoService pastoService) {
+        this.pastoService = pastoService;
+    }
+
     private List<Pasto> cibooo = new ArrayList<>(Arrays.asList(
-            new Pasto("Hamburger", "Beef patty with bacon, cheddar cheese and Kaiser bread", 15.50),
-            new Pasto("Pizza", "Pizza dough with mozzarella cheese and tomato sauce", 8.50),
-            new Pasto("Risotto", "White rice with onions ans saffron",  5.40)
+            new Pasto("Hamburger", "Beef patty with bacon, cheddar cheese and Kaiser bread", 15.50, 800),
+            new Pasto("Pizza", "Pizza dough with mozzarella cheese and tomato sauce", 8.50, 1200),
+            new Pasto("Risotto", "White rice with onions ans saffron",  5.40, 450)
     ));
 
     @GetMapping("/meals")
@@ -95,5 +102,40 @@ public class MealEndpoint {
             }
         }
         return ResponseEntity.ok("Price of "+name+" updated to "+price+"€!");
+    }
+
+    // -----------------------------------------------------------------------------------------------------------------
+    // Esercizio 6    --------------------------------------------------------------------------------------------------
+    // -----------------------------------------------------------------------------------------------------------------
+
+    @GetMapping (value = "/api/pasto/test1")
+    public ResponseEntity<List<Pasto>> test1() {
+        return ResponseEntity.ok(pastoService.test1());
+    }
+    @GetMapping (value = "/api/pasto/test2")
+    public ResponseEntity<List<Pasto>> test2() {
+        return ResponseEntity.ok(pastoService.test2());
+    }
+    @GetMapping (value = "/api/pasto/test3")
+    public ResponseEntity<List<Pasto>> test3() {
+        return ResponseEntity.ok(pastoService.test3());
+    }
+    @GetMapping (value = "/api/pasto/test4")
+    public ResponseEntity<List<Pasto>> test4() {
+        return ResponseEntity.ok(pastoService.test4());
+    }
+    @GetMapping (value = "/api/pasto/test5")
+    public ResponseEntity<List<Pasto>> test5() {
+        return ResponseEntity.ok(pastoService.test5());
+    }
+    @GetMapping (value = "/api/pasto/test6")
+    public ResponseEntity<List<Pasto>> test6() {
+        return ResponseEntity.ok(pastoService.test6());
+    }
+
+    // solo per test miei
+    @GetMapping (value = "/api/pasti")
+    public ResponseEntity<List<Pasto>> getTutti() {
+        return ResponseEntity.ok(pastoService.getPasti());
     }
 }
