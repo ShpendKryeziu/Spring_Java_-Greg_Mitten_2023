@@ -11,12 +11,14 @@ public class Pasto {
     private String description;
     private double price;
     private Integer calories;
+    private boolean isWinterMeal;
 
-    public Pasto(String name, String description, double price, Integer calories) {
+    public Pasto(String name, String description, double price, Integer calories, boolean isWinterMeal) {
         this.name = name;
         this.description = description;
         this.price = price;
         this.calories = calories;
+        this.isWinterMeal = isWinterMeal;
     }
 
     public Pasto() {}
@@ -39,4 +41,6 @@ public class Pasto {
     public void setCalories(Integer calories) { this.calories = calories; }
     public Integer getId() { return id; }
     public void setId(Integer id) { this.id = id; }
+    public boolean getIsWinterMeal() { return isWinterMeal; }
+    public void setIsWinterMeal(boolean isWinterMeal) { this.isWinterMeal = isWinterMeal; }
 }

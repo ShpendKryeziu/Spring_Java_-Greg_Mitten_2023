@@ -17,9 +17,9 @@ public class PastoController {
     }
 
     private List<Pasto> cibooo = new ArrayList<>(Arrays.asList(
-            new Pasto("Hamburger", "Beef patty with bacon, cheddar cheese and Kaiser bread", 15.50, 800),
-            new Pasto("Pizza", "Pizza dough with mozzarella cheese and tomato sauce", 8.50, 1200),
-            new Pasto("Risotto", "White rice with onions ans saffron",  5.40, 450)
+            new Pasto("Hamburger", "Beef patty with bacon, cheddar cheese and Kaiser bread", 15.50, 800, false),
+            new Pasto("Pizza", "Pizza dough with mozzarella cheese and tomato sauce", 8.50, 1200, false),
+            new Pasto("Risotto", "White rice with onions ans saffron",  5.40, 450, true)
     ));
 
     @GetMapping("/meals")
@@ -137,5 +137,12 @@ public class PastoController {
     @GetMapping (value = "/api/pasti")
     public ResponseEntity<List<Pasto>> getTutti() {
         return ResponseEntity.ok(pastoService.getPasti());
+    }
+
+    // ESERCIZIO 6 __________________________________________________________ //
+
+    @GetMapping (value = "/api/winter-pasti")
+    public List<Pasto> getWinterPasti() {
+        return pastoService.getWinterPasti();
     }
 }

@@ -22,7 +22,7 @@ public class IngredientService {
     }
 
     public void updateIngredient(Ingredient ingredient, Long ingredientId) throws SQLException {
-        ingredientDao.updateById(ingredientDao, ingredient, ingredientId);
+        ingredientDao.updateById(ingredient, ingredientId);
     }
 
     public void deleteIngredient(Long ingredientId) {

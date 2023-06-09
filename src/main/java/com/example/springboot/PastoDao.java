@@ -23,4 +23,8 @@ public interface PastoDao extends JpaRepository<Pasto, Integer> {
     // Test a caso
     List<Pasto> findByDescriptionContains(String word);
     List<Pasto> findByPriceLessThanAndCaloriesGreaterThanOrCaloriesLessThan(Double maxPrice, Integer minCalories, Integer maxCalories);
+
+    // ESERCIZIO 6 __________________________________________________________ //
+
+    List<Pasto> findByIsWinterMeal(boolean isWinterMeal);
 }

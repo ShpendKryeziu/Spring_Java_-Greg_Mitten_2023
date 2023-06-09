@@ -1,12 +1,19 @@
 package com.example.springboot.Exercise5;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.Lazy;
+import org.springframework.stereotype.Component;
+
 import java.util.NoSuchElementException;
 
+@Component
 public class IngredientDaoCustomImpl implements IngredientDaoCustom{
-
-    // Purtroppo mi tocca mettere ingredientDao come parametro della funzione, perché se uso @Autowired mi dà errore per
-    // dipendenza ciclica, se non lo metto non posso accedere al repository da qui
+    private IngredientDao ingredientDao;
+    @Autowired
+    public IngredientDaoCustomImpl(@Lazy IngredientDao ingredientDao) {
+        this.ingredientDao = ingredientDao;
+    }
     @Override
-    public void updateById(IngredientDao ingredientDao, Ingredient ingredient, Long ingredientId){
+    public void updateById(Ingredient ingredient, Long ingredientId){
         Ingredient ingredientRepo = ingredientDao.findById(ingredientId).orElseThrow(NoSuchElementException::new);
         ingredientRepo.setName(ingredient.getName());
         ingredientRepo.setIsGlutenFree(ingredient.isGlutenFree());

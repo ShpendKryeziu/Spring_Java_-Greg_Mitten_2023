@@ -1,8 +1,12 @@
 package com.example.springboot;
 
+import com.mashape.unirest.http.Unirest;
+import com.mashape.unirest.http.exceptions.UnirestException;
+import org.json.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @Service
@@ -37,5 +41,25 @@ public class PastoService {
     }
     public List<Pasto> test6() {
         return pastoDao.findByPriceLessThanAndCaloriesGreaterThanOrCaloriesLessThan(11.0, 500, 400);
+    }
+
+    // ESERCIZIO 6 __________________________________________________________ //
+
+    public List<Pasto> getWinterPasti() {
+        Double currentTemp = getCurrentTemperatureInCelsius();
+        if (currentTemp < 12.0) {
+            return pastoDao.findByIsWinterMeal(true);
+        } else return pastoDao.findByIsWinterMeal(false);
+    }
+
+    private Double getCurrentTemperatureInCelsius(){
+        JSONObject apiResponse = null;
+        try {
+            apiResponse = Unirest.get("https://api.open-meteo.com/v1/forecast?latitude=64.14&longitude=-21.90&current_weather=true")
+                    .asJson().getBody().getObject();
+        } catch (UnirestException e) {
+            throw new RuntimeException(e);
+        }
+        return apiResponse.getJSONObject("current_weather").getDouble("temperature");
     }
 }
